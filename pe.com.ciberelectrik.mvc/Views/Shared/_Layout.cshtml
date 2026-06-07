@@ -1,0 +1,123 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CiberElectrik | @ViewBag.Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .body-content {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #212529;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 5px 0;
+            width: 100%
+        }
+    </style>
+</head>
+<body>
+    <div class="container body">
+        @*inicio del menu*@
+        <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark" ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">CiberElectrik</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Quienes Somos</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mantenmiento Simple
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#">Marca</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Categoria</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Distrito</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Rol</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Sexo</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Tipo de Documento</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mantenmiento Cruzado
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" href="#">Producto</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Cliente</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="#">Empleado</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        @*fin del menu*@
+        <div class="mb-3"></div>
+        @*inicio del cuerpo de la pagina*@
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+        @*fin del cuerpo de la pagina*@
+        <footer>
+            <p>
+                &copy; @DateTime.Now.Year -
+                <span>CiberElectrik</span>
+            </p>
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
+
