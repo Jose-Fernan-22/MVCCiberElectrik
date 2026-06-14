@@ -5,37 +5,71 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Enable</h2>
-
-<h3>Are you sure you want to enable this?</h3>
-<div>
-    <h4>Categoria</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Enable" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+@*contenedor*@
+<div class="container mt-4">
+    @*inicio dek card*@
+    <div class="card shadow border-0">
+        @*cabecera del card*@
+        <div class="card-header bg-warning text-white d-flex justify-content-between aling-items-center">
+            <h4 class="mb-0">Habilitación de Categorias</h4>
         </div>
-    }
+        @*fin de la cabecera del card*@
+
+        @*incio del body del card*@
+        <div class="card-body">
+            <div class="alert alert-warning">
+                ¿ Estás seguro que deseas habilitar el siguiente registro?
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Código</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.codigo
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Nombre</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.nombre
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="col-md-3">
+                    <strong>Estado</strong>
+                </div>
+                <div class="col-md-9">
+                    @if (Model.estado)
+                    {
+                        <span class="badge bg-success">Habilitado</span>
+
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Deshabilitado</span>
+                    }
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-warning">Habilitar Categoria</button>
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-dark" })
+                </div>
+            }
+
+        </div>
+        @*fin del cuerpo del card*@
+        @*inicio del footer del card*@
+        <div class="card-footer text-muted text-center">
+
+        </div>
+        @*fin del footer del card*@
+    </div>
+    @*fin del card*@
 </div>
+@*fin del contenedor*@

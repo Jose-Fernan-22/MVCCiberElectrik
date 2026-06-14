@@ -1,83 +1,122 @@
 ﻿@model pe.com.ciberelectrik.mvc.Models.Producto
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle de Producto";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+@*contenedor*@
+<div class="container mt-4">
+    @*inicio dek card*@
+    <div class="card shadow border-0">
+        @*cabecera del card*@
+        <div class="card-header bg-dark text-white d-flex justify-content-between aling-items-center">
+            <h4 class="mb-0">Detalle de Productos</h4>
+        </div>
+        @*fin de la cabecera del card*@
 
-<div>
-    <h4>Producto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.categoria.nombre)
-        </dt>
+        @*incio del body del card*@
+        <div class="card-body">
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Código</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.codigo
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Nombre</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.nombre
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Descripcion</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.descripcion
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Precio</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.precio
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Cantidad</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.cantidad
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Fec. Ingreso</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.fechaingreso
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Marca</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.marca.nombre
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="col-md-3">
+                    <strong>Categoria</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.categoria.nombre
+                </div>
+            </div>
+            <div class="mb-4">
+                <div class="col-md-3">
+                    <strong>Estado</strong>
+                </div>
+                <div class="col-md-9">
+                    @if (Model.estado)
+                    {
+                        <span class="badge bg-success">Habilitado</span>
 
-        <dd>
-            @Html.DisplayFor(model => model.categoria.nombre)
-        </dd>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Deshabilitado</span>
+                    }
+                </div>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <dt>
-            @Html.DisplayNameFor(model => model.marca.nombre)
-        </dt>
+                <div class="d-flex justify-content-between">
+                    @Html.ActionLink("Actualizar", "Edit", new { id = Model.codigo }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = Model.codigo }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Habilitar", "Enable", new { id = Model.codigo }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-dark" })
+                </div>
+            }
 
-        <dd>
-            @Html.DisplayFor(model => model.marca.nombre)
-        </dd>
+        </div>
+        @*fin del cuerpo del card*@
+        @*inicio del footer del card*@
+        <div class="card-footer text-muted text-center">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.descripcion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.precio)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.precio)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.cantidad)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.cantidad)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.fechaingreso)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.fechaingreso)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
+        </div>
+        @*fin del footer del card*@
+    </div>
+    @*fin del card*@
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.codigo }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@*fin del contenedor*@

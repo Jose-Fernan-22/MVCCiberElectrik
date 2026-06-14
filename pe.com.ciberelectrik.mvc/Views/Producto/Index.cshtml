@@ -1,77 +1,125 @@
 ﻿@model IEnumerable<pe.com.ciberelectrik.mvc.Models.Producto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+@*contenedor*@
+<div class="container mt-4">
+    @*inicio dek card*@
+    <div class="card shadow border-0">
+        @*cabecera del card*@
+        <div class="card-header bg-dark text-white d-flex justify-content-between aling-items-center">
+            <h4 class="mb-0">Listado de Productos</h4>
+            @Html.ActionLink("Registrar Producto", "Create", null, new { @class = "btn btn-primary bi bi-plus-circle-fill" })
+        </div>
+        @*fin de la cabecera del card*@
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.categoria)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.marca)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.precio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaingreso)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
+        @*incio del body del card*@
+        <div class="card-body">
+            <div class="mb-3">
+                <span class="badge bg-secondary">
+                    Total de Registros : @Model.Count()
+                </span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width:5%">
+                                Codigo
+                            </th>
+                            <th style="width:10%">
+                                Nombre
+                            </th>
+                            <th style="width:10%">
+                                Descripcion
+                            </th>
+                            <th style="width:5%">
+                                Precio
+                            </th>
+                            <th style="width:5%">
+                                Cantidad
+                            </th>
+                            <th style="width:10%">
+                                Fec. de Ingreso
+                            </th>
+                            <th style="width:10%">
+                                Marca
+                            </th>
+                            <th style="width:10%">
+                                Categoria
+                            </th>
+                            <th style="width:5%">
+                                Estado
+                            </th>
+                            <th style="width:30%">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.codigo, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nombre, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.descripcion, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    S/. @item.precio.ToString("N2")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.cantidad, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @item.fechaingreso.ToString("dd/MM/yyyy")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.marca.nombre, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.categoria.nombre, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @if (item.estado)
+                                    {
+                                        <span class="badge bg-success">Habilitado</span>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.categoria.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.marca.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.descripcion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precio)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cantidad)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fechaingreso)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.codigo }) |
-            @Html.ActionLink("Details", "Details", new { id = item.codigo }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.codigo }) |
-            @Html.ActionLink("Enable", "Enable", new { id = item.codigo })
-        </td>
-    </tr>
-}
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Deshabilitado</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        @Html.ActionLink("Actualizar", "Edit", new { id = item.codigo }, new { @class = "btn btn-success btn-sm bi bi-pencil-square me-1" })
+                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.codigo }, new { @class = "btn btn-danger btn-sm bi bi-pencil-square me-1" })
+                                        @Html.ActionLink("Habilitar", "Enable", new { id = item.codigo }, new { @class = "btn btn-warning btn-sm bi bi-pencil-square me-1" })
+                                        @Html.ActionLink("Ver Detalle", "Details", new { id = item.codigo }, new { @class = "btn btn-dark btn-sm bi bi-pencil-square me-1" })
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
 
-</table>
+                </table>
+            </div>
+        </div>
+        @*fin del cuerpo del card*@
+        @*inicio del footer del card*@
+        <div class="card-footer text-muted text-center">
+            CiberElectrik  Producto - Todos los derechos reservados &copy; @DateTime.Now.Year
+        </div>
+        @*fin del footer del card*@
+    </div>
+    @*fin del card*@
+</div>
+@*fin del contenedor*@
