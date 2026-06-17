@@ -52,9 +52,6 @@
                                     @Html.DisplayFor(modelItem => item.nombre, null, new { @class = "text-center" })
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.estado, null, new { @class = "text-center" })
-                                </td>
-                                <td>
                                     @if (item.estado)
                                     {
                                         <span class="badge bg-success">Habilitado</span>
@@ -88,5 +85,3 @@
     @*fin del card*@
 </div>
 @*fin del contenedor*@
-
-

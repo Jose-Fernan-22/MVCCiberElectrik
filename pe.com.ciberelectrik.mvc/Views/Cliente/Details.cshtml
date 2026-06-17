@@ -1,115 +1,150 @@
 ﻿@model pe.com.ciberelectrik.mvc.Models.Cliente
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalle de Cliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+@*contenedor*@
+<div class="container mt-4">
+    @*inicio del card*@
+    <div class="card shadow border-0">
+        @*cabecera del card*@
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Detalle de Cliente</h4>
+        </div>
+        @*fin de la cabecera del card*@
 
-<div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.distrito.nombre)
-        </dt>
+        @*inicio del body del card*@
+        <div class="card-body">
 
-        <dd>
-            @Html.DisplayFor(model => model.distrito.nombre)
-        </dd>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Código</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.codigo
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.sexo.nombre)
-        </dt>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Nombre Completo</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.nombre @Model.apellidopaterno @Model.apellidomaterno
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.sexo.nombre)
-        </dd>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Tipo de Documento</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.tipodocumento.nombre
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.tipodocumento.nombre)
-        </dt>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Documento</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.documento
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.tipodocumento.nombre)
-        </dd>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Sexo</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.sexo.nombre
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Dirección</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.direccion
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Distrito</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.distrito.nombre
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.apellidopaterno)
-        </dt>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Teléfono Fijo</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.telefono
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellidopaterno)
-        </dd>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Celular</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.celular
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.apellidomaterno)
-        </dt>
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Correo Electrónico</strong>
+                </div>
+                <div class="col-md-9">
+                    @Model.correo
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.apellidomaterno)
-        </dd>
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <strong>Estado</strong>
+                </div>
+                <div class="col-md-9">
+                    @if (Model.estado)
+                    {
+                        <span class="badge bg-success">Habilitado</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Deshabilitado</span>
+                    }
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.documento)
-        </dt>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <dd>
-            @Html.DisplayFor(model => model.documento)
-        </dd>
+                <div class="d-flex justify-content-between">
+                    @Html.ActionLink("Actualizar", "Edit", new { id = Model.codigo }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = Model.codigo }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Habilitar", "Enable", new { id = Model.codigo }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Regresar", "Index", null, new { @class = "btn btn-dark" })
+                </div>
+            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.direccion)
-        </dt>
+        </div>
+        @*fin del cuerpo del card*@
 
-        <dd>
-            @Html.DisplayFor(model => model.direccion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.celular)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.celular)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
+        @*inicio del footer del card*@
+        <div class="card-footer text-muted text-center">
+            CiberElectrik Clientes - Todos los derechos reservados &copy; @DateTime.Now.Year
+        </div>
+        @*fin del footer del card*@
+    </div>
+    @*fin del card*@
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.codigo }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@*fin del contenedor*@

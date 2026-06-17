@@ -106,7 +106,7 @@ namespace pe.com.ciberelectrik.mvc.Models
         public int codtipd { get; set; }
         [ForeignKey("codtipd")]
         [Display(Name = "Tipo Documento")]
-        public virtual TipoDocumento tipoDocumento { get; set; }
+        public virtual TipoDocumento tipodocumento { get; set; }
 
         //Sexo
         [Required]

@@ -1,121 +1,77 @@
 ﻿@model pe.com.ciberelectrik.mvc.Models.Cliente
 
 @{
-    ViewBag.Title = "Enable";
+    ViewBag.Title = "Habilitar Cliente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Enable</h2>
-
-<h3>Are you sure you want to enable this?</h3>
-<div>
-    <h4>Cliente</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.distrito.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.distrito.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.sexo.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.sexo.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.tipodocumento.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.tipodocumento.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.nombre)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nombre)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.apellidopaterno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.apellidopaterno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.apellidomaterno)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.apellidomaterno)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.documento)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.documento)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.direccion)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.direccion)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.telefono)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.telefono)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.celular)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.celular)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.correo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.correo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Enable" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="container mt-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-warning text-white">
+            <h4 class="mb-0">Habilitar Registro de Cliente</h4>
         </div>
-    }
+
+        <div class="card-body">
+            @* Alerta visual informativa *@
+            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                <i class="bi bi-info-circle-fill fs-4 me-3"></i>
+                <div>
+                    <strong>Confirmación:</strong> ¿Está seguro que desea habilitar a este cliente?
+                </div>
+            </div>
+
+            <h5 class="text-secondary border-bottom pb-2 mb-3 mt-4">Datos del Cliente a Habilitar</h5>
+
+            <div class="row mb-2">
+                <div class="col-md-3 fw-bold">Código:</div>
+                <div class="col-md-9">@Model.codigo</div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-3 fw-bold">Cliente:</div>
+                <div class="col-md-9">@Model.nombre @Model.apellidopaterno @Model.apellidomaterno</div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-3 fw-bold">Documento:</div>
+                <div class="col-md-9">@Model.tipodocumento.nombre - @Model.documento</div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-3 fw-bold">Contacto:</div>
+                <div class="col-md-9">@Model.celular | @Model.correo</div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-3 fw-bold">Estado Actual:</div>
+                <div class="col-md-9">
+                    @if (Model.estado)
+                    {
+                        <span class="badge bg-success">Habilitado</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Deshabilitado</span>
+                    }
+                </div>
+            </div>
+
+            @* Formulario para enviar la petición POST de habilitación *@
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="d-flex justify-content-between border-top pt-3">
+                    @Html.ActionLink("Cancelar y Regresar", "Index", null, new { @class = "btn btn-dark" })
+                    <button type="submit" class="btn btn-warning">
+                        <i class="bi bi-check-circle-fill"></i> Confirmar Habilitación
+                    </button>
+                </div>
+            }
+        </div>
+
+        <div class="card-footer text-muted text-center">
+            CiberElectrik Clientes - Todos los derechos reservados &copy; @DateTime.Now.Year
+        </div>
+    </div>
 </div>

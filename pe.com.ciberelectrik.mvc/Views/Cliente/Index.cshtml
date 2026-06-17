@@ -1,101 +1,118 @@
 ﻿@model IEnumerable<pe.com.ciberelectrik.mvc.Models.Cliente>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de Clientes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*contenedor*@
+<div class="container mt-4">
+    @*inicio dek card*@
+    <div class="card shadow border-0">
+        @*cabecera del card*@
+        <div class="card-header bg-dark text-white d-flex justify-content-between aling-items-center">
+            <h4 class="mb-0">Listado de Clientes</h4>
+            @Html.ActionLink("Registrar Cliente", "Create", null, new { @class = "btn btn-primary bi bi-plus-circle-fill" })
+        </div>
+        @*fin de la cabecera del card*@
 
-<h2>Index</h2>
+        @*incio del body del card*@
+        <div class="card-body">
+            <div class="mb-3">
+                <span class="badge bg-secondary">
+                    Total de Registros : @Model.Count()
+                </span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th style="width:5%">
+                                Codigo
+                            </th>
+                            <th style="width:20%">
+                                Cliente
+                            </th>
+                            <th style="width:10%">
+                                Tipo Doc.
+                            </th>
+                            <th style="width:10%">
+                                Documento
+                            </th>
+                            <th style="width:10%">
+                                Celular
+                            </th>
+                            <th style="width:15%">
+                                Correo
+                            </th>
+                            <th style="width:10%">
+                                Distrito
+                            </th>
+                            <th style="width:5%">
+                                Estado
+                            </th>
+                            <th style="width:15%">
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.codigo, null, new { @class = "text-center" })
+                                </td>
+                                <td class="text-start">
+                                    @item.nombre, @item.apellidopaterno, @item.apellidomaterno
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.tipodocumento.nombre, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.documento, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.celular, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.correo, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.distrito.nombre, null, new { @class = "text-center" })
+                                </td>
+                                <td>
+                                    @if (item.estado)
+                                    {
+                                        <span class="badge bg-success">Habilitado</span>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.distrito)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sexo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tipodocumento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidopaterno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.apellidomaterno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.documento)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.direccion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.telefono)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.celular)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.correo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>
-        <th></th>
-    </tr>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Deshabilitado</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        @Html.ActionLink("Actualizar", "Edit", new { id = item.codigo }, new { @class = "btn btn-success btn-sm bi bi-pencil-square me-1" })
+                                        @Html.ActionLink("Eliminar", "Delete", new { id = item.codigo }, new { @class = "btn btn-danger btn-sm bi bi-pencil-square me-1" })
+                                        @Html.ActionLink("Habilitar", "Enable", new { id = item.codigo }, new { @class = "btn btn-warning btn-sm bi bi-pencil-square me-1" })
+                                        @Html.ActionLink("Ver Detalle", "Details", new { id = item.codigo }, new { @class = "btn btn-dark btn-sm bi bi-pencil-square me-1" })
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.distrito.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sexo.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipodocumento.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidopaterno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.apellidomaterno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.documento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.direccion)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.telefono)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.celular)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.correo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.codigo }) |
-            @Html.ActionLink("Details", "Details", new { id = item.codigo }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.codigo }) |
-            @Html.ActionLink("Enable", "Enable", new { id = item.codigo })
-        </td>
-    </tr>
-}
-
-</table>
+                </table>
+            </div>
+        </div>
+        @*fin del cuerpo del card*@
+        @*inicio del footer del card*@
+        <div class="card-footer text-muted text-center">
+            CiberElectrik  Clientes - Todos los derechos reservados &copy; @DateTime.Now.Year
+        </div>
+        @*fin del footer del card*@
+    </div>
+    @*fin del card*@
+</div>
+@*fin del contenedor*@
